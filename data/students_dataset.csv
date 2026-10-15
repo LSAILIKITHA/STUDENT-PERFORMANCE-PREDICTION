@@ -1,0 +1,121 @@
+student_id,attendance,internal_marks,assignment_completion,study_hours,previous_exam_marks,label
+STU-1001,55.5,23.0,50.1,2.3,56.5,Needs Academic Support
+STU-1002,37.2,15.9,20.9,0.8,36.6,Needs Academic Support
+STU-1003,83.6,44.4,93.2,4.3,87.4,Good Performer
+STU-1004,55.1,28.9,61.1,1.6,47.6,Needs Academic Support
+STU-1005,43.4,11.3,22.9,1.6,38.9,Needs Academic Support
+STU-1006,68.9,25.9,67.4,1.7,54.4,Needs Academic Support
+STU-1007,66.8,29.5,58.3,2.3,45.8,Needs Academic Support
+STU-1008,85.2,37.0,88.5,3.9,80.8,Good Performer
+STU-1009,61.9,24.1,49.8,1.5,60.9,Needs Academic Support
+STU-1010,66.6,21.9,61.8,1.3,51.5,Needs Academic Support
+STU-1011,51.0,17.8,40.5,1.6,42.8,Needs Academic Support
+STU-1012,80.6,40.1,89.0,4.2,94.8,Good Performer
+STU-1013,42.9,19.2,31.9,1.7,35.6,Needs Academic Support
+STU-1014,84.4,43.3,88.9,5.5,93.9,Good Performer
+STU-1015,77.9,42.0,81.2,2.3,65.8,Good Performer
+STU-1016,91.3,46.3,91.3,3.7,83.0,Good Performer
+STU-1017,48.2,23.6,45.8,0.5,41.6,Needs Academic Support
+STU-1018,65.2,22.9,59.7,1.2,52.4,Needs Academic Support
+STU-1019,87.4,40.5,76.7,3.5,68.0,Good Performer
+STU-1020,56.8,14.2,39.2,1.3,28.5,Needs Academic Support
+STU-1021,65.2,28.6,57.2,1.0,50.5,Needs Academic Support
+STU-1022,96.7,47.4,97.5,4.6,76.2,Good Performer
+STU-1023,58.7,11.2,34.6,0.6,42.5,Needs Academic Support
+STU-1024,57.4,25.2,57.6,1.5,59.8,Needs Academic Support
+STU-1025,77.8,36.5,85.1,2.6,70.3,Good Performer
+STU-1026,51.2,16.1,35.5,0.7,30.2,Needs Academic Support
+STU-1027,90.6,39.0,88.3,3.7,88.3,Good Performer
+STU-1028,96.3,47.2,86.1,4.3,89.0,Good Performer
+STU-1029,82.4,48.2,93.6,5.2,91.5,Good Performer
+STU-1030,58.6,21.1,54.9,1.8,52.9,Needs Academic Support
+STU-1031,67.8,30.8,47.3,1.7,50.8,Needs Academic Support
+STU-1032,41.2,12.7,33.5,1.0,31.4,Needs Academic Support
+STU-1033,96.6,41.8,97.9,5.4,76.1,Good Performer
+STU-1034,55.9,23.6,47.8,1.6,28.8,Needs Academic Support
+STU-1035,77.8,34.8,73.1,3.1,81.8,Good Performer
+STU-1036,94.1,41.9,91.3,6.9,95.9,Good Performer
+STU-1037,84.3,31.9,77.3,4.9,74.8,Good Performer
+STU-1038,84.7,30.7,82.5,3.5,79.5,Good Performer
+STU-1039,97.3,37.0,87.8,5.6,89.2,Good Performer
+STU-1040,82.2,47.6,88.7,5.6,88.0,Good Performer
+STU-1041,82.6,36.3,88.8,2.6,77.2,Good Performer
+STU-1042,87.1,44.7,89.5,4.6,90.8,Good Performer
+STU-1043,88.2,49.0,99.9,3.8,79.5,Good Performer
+STU-1044,96.8,47.5,98.2,4.8,78.3,Good Performer
+STU-1045,68.4,26.7,67.7,2.2,45.1,Needs Academic Support
+STU-1046,60.7,27.3,66.6,1.2,47.0,Needs Academic Support
+STU-1047,90.0,39.5,94.1,6.0,79.3,Good Performer
+STU-1048,60.0,25.4,65.8,2.5,46.6,Needs Academic Support
+STU-1049,78.6,30.0,85.9,3.9,69.5,Good Performer
+STU-1050,65.5,24.7,45.2,1.1,60.0,Needs Academic Support
+STU-1051,48.6,21.7,37.5,0.7,27.9,Needs Academic Support
+STU-1052,96.2,46.3,97.9,6.6,79.4,Good Performer
+STU-1053,81.9,46.1,98.3,4.9,88.0,Good Performer
+STU-1054,96.7,47.2,99.6,6.3,93.5,Good Performer
+STU-1055,93.3,40.3,99.0,6.3,93.1,Good Performer
+STU-1056,60.1,28.7,47.5,2.6,59.6,Needs Academic Support
+STU-1057,94.7,42.0,89.6,6.3,79.8,Good Performer
+STU-1058,83.5,40.3,98.0,6.9,80.9,Good Performer
+STU-1059,62.6,30.8,57.3,2.7,47.0,Needs Academic Support
+STU-1060,39.5,23.5,28.0,0.6,35.0,Needs Academic Support
+STU-1061,61.0,26.7,56.8,1.7,54.8,Needs Academic Support
+STU-1062,92.8,36.0,98.9,5.4,90.1,Good Performer
+STU-1063,67.7,24.0,46.6,2.2,50.6,Needs Academic Support
+STU-1064,95.3,45.4,89.5,4.6,83.6,Good Performer
+STU-1065,78.8,31.5,79.6,4.8,76.5,Good Performer
+STU-1066,50.4,14.2,36.4,0.5,31.6,Needs Academic Support
+STU-1067,82.5,37.9,80.4,3.3,68.6,Good Performer
+STU-1068,86.7,39.6,75.1,2.3,73.8,Good Performer
+STU-1069,61.4,29.0,62.3,2.2,48.8,Needs Academic Support
+STU-1070,80.4,39.2,92.1,6.5,76.5,Good Performer
+STU-1071,83.2,32.3,84.5,3.5,69.1,Good Performer
+STU-1072,55.1,28.3,62.7,1.2,52.2,Needs Academic Support
+STU-1073,97.2,42.7,85.8,4.4,92.8,Good Performer
+STU-1074,85.4,38.0,89.8,3.8,81.2,Good Performer
+STU-1075,50.3,20.1,35.1,1.6,37.6,Needs Academic Support
+STU-1076,53.6,16.6,27.8,0.8,39.7,Needs Academic Support
+STU-1077,64.9,26.9,51.3,1.1,49.9,Needs Academic Support
+STU-1078,85.8,43.0,87.1,4.3,89.6,Good Performer
+STU-1079,56.2,24.5,57.5,1.7,48.5,Needs Academic Support
+STU-1080,86.8,37.0,84.5,4.6,78.0,Good Performer
+STU-1081,75.1,34.2,85.6,4.6,81.2,Good Performer
+STU-1082,84.7,36.6,82.9,2.7,68.7,Good Performer
+STU-1083,75.4,34.0,84.2,3.2,67.8,Good Performer
+STU-1084,76.7,37.5,72.5,3.2,74.6,Good Performer
+STU-1085,91.6,37.8,91.9,3.7,83.0,Good Performer
+STU-1086,85.9,45.9,90.7,6.1,92.5,Good Performer
+STU-1087,81.5,36.3,93.1,7.0,82.3,Good Performer
+STU-1088,69.8,27.2,62.3,2.7,48.4,Needs Academic Support
+STU-1089,82.7,37.6,95.0,5.5,79.6,Good Performer
+STU-1090,69.6,21.8,59.0,2.3,46.9,Needs Academic Support
+STU-1091,73.3,21.2,45.6,1.6,56.5,Needs Academic Support
+STU-1092,44.9,20.0,22.3,1.4,39.4,Needs Academic Support
+STU-1093,93.9,47.1,94.0,3.9,95.7,Good Performer
+STU-1094,61.6,24.7,53.5,1.9,50.8,Needs Academic Support
+STU-1095,70.6,21.2,67.1,2.1,59.1,Needs Academic Support
+STU-1096,63.3,28.1,67.2,1.5,58.7,Needs Academic Support
+STU-1097,81.3,35.2,85.2,2.8,79.5,Good Performer
+STU-1098,56.6,29.7,50.6,1.8,55.4,Needs Academic Support
+STU-1099,75.4,40.2,75.3,2.6,78.6,Good Performer
+STU-1100,95.8,45.1,89.1,3.5,94.9,Good Performer
+STU-1101,93.0,42.4,96.4,5.9,88.6,Good Performer
+STU-1102,85.3,31.1,76.0,4.1,70.2,Good Performer
+STU-1103,81.2,36.4,79.7,4.2,70.6,Good Performer
+STU-1104,60.1,22.8,47.8,1.3,47.0,Needs Academic Support
+STU-1105,84.9,32.2,75.9,3.5,77.3,Good Performer
+STU-1106,48.1,14.0,23.0,0.8,30.2,Needs Academic Support
+STU-1107,80.3,42.9,89.1,6.9,86.6,Good Performer
+STU-1108,57.4,29.6,56.3,2.6,54.8,Needs Academic Support
+STU-1109,80.7,32.2,72.9,4.8,73.1,Good Performer
+STU-1110,62.6,20.8,59.5,1.1,47.5,Needs Academic Support
+STU-1111,78.9,41.9,74.1,4.3,75.3,Good Performer
+STU-1112,59.3,25.7,55.4,1.8,59.6,Needs Academic Support
+STU-1113,42.6,18.7,38.3,1.5,46.8,Needs Academic Support
+STU-1114,83.8,44.6,87.4,4.1,76.6,Good Performer
+STU-1115,88.1,43.7,89.4,4.3,89.8,Good Performer
+STU-1116,63.6,27.6,66.2,2.4,55.6,Needs Academic Support
+STU-1117,72.7,24.7,57.5,2.2,60.4,Needs Academic Support
+STU-1118,56.4,21.8,52.1,2.3,54.7,Needs Academic Support
+STU-1119,82.2,45.0,95.5,6.8,85.5,Good Performer
+STU-1120,76.0,30.5,79.8,3.0,69.3,Good Performer

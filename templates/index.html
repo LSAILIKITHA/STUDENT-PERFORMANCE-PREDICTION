@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Prediction | Concept Learning (Find-S)</title>
+    <meta name="description" content="College Machine Learning Project - Student Performance Prediction Using Concept Learning and the Find-S Algorithm with interactive analytics.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Chart.js for analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <!-- Top Header -->
+    <header class="app-header">
+        <div class="header-left">
+            <button id="sidebarToggle" class="icon-btn sidebar-toggle-btn" aria-label="Toggle Sidebar">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <div class="brand-group">
+                <div class="brand-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="brand-title">EduPredict Analytics</h1>
+                    <p class="brand-subtitle">Student Performance Prediction Using Concept Learning</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="model-badge">
+                <span class="pulse-dot"></span>
+                <span class="badge-text">Find-S Concept Learner Active</span>
+            </div>
+            <div class="academic-badge">Academic ML Project</div>
+        </div>
+    </header>
+
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside id="appSidebar" class="app-sidebar">
+            <div class="sidebar-section-title">NAVIGATION</div>
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-target="dashboardPage">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="9"></rect>
+                        <rect x="14" y="3" width="7" height="5"></rect>
+                        <rect x="14" y="12" width="7" height="9"></rect>
+                        <rect x="3" y="16" width="7" height="5"></rect>
+                    </svg>
+                    <span>Dashboard</span>
+                </button>
+
+                <button class="nav-item" data-target="predictPage">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    <span>Student Prediction</span>
+                </button>
+
+                <button class="nav-item" data-target="resultsPage" id="navResultsBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span>Prediction Results</span>
+                    <span class="badge-counter" id="resultsBadge" style="display:none;">New</span>
+                </button>
+
+                <button class="nav-item" data-target="recordsPage">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span>Student Records</span>
+                </button>
+
+                <button class="nav-item" data-target="modelPage">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    <span>About the Model</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="sidebar-model-info">
+                    <div class="sm-title">Algorithm</div>
+                    <div class="sm-value">Find-S (Mitchell, 1997)</div>
+                    <div class="sm-hypothesis" id="sidebarHypothesis">⟨ ... ⟩</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            <div class="content-container">
+
+                <!-- 1. DASHBOARD PAGE -->
+                <section id="dashboardPage" class="page-section active">
+                    <!-- Project Hero Banner -->
+                    <div class="hero-banner">
+                        <div class="hero-content">
+                            <span class="hero-tag">College Machine Learning Project</span>
+                            <h2 class="hero-title">Student Performance Prediction Using Concept Learning</h2>
+                            <p class="hero-desc">
+                                An empirical machine learning analytics dashboard utilizing Tom Mitchell's 
+                                <strong>Find-S Concept Learning</strong> algorithm to assess academic parameters, 
+                                evaluate students against general-to-specific hypothesis constraints, and prescribe targeted pedagogical interventions.
+                            </p>
+                            <div class="hero-actions">
+                                <button class="btn btn-primary" onclick="navigateTo('predictPage')">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    </svg>
+                                    Predict Student Performance
+                                </button>
+                                <button class="btn btn-outline" onclick="navigateTo('modelPage')">
+                                    Learn About Find-S Algorithm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap bg-blue-subtle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Total Sample Students</span>
+                                <div class="metric-value" id="statTotalStudents">-</div>
+                                <span class="metric-subtext" id="statSplitText">Dataset partition: 75% train / 25% test</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap bg-green-subtle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Good Performers</span>
+                                <div class="metric-value text-success" id="statGoodPerformers">-</div>
+                                <span class="metric-subtext" id="statGoodPct">Calculating...</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap bg-amber-subtle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Need Academic Support</span>
+                                <div class="metric-value text-amber" id="statSupportNeeded">-</div>
+                                <span class="metric-subtext" id="statSupportPct">Calculating...</span>
+                            </div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap bg-indigo-subtle">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" stroke-width="2">
+                                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Test Set Empirical Accuracy</span>
+                                <div class="metric-value text-indigo" id="statAccuracy">-</div>
+                                <span class="metric-subtext" id="statEvalNote">Verified on held-out test split</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dashboard Visuals & Hypothesis Section -->
+                    <div class="dashboard-row">
+                        <!-- Category Distribution Chart Card -->
+                        <div class="card chart-card">
+                            <div class="card-header">
+                                <h3 class="card-title">Performance Category Distribution</h3>
+                                <span class="card-subtitle">Distribution of labeled student cohorts</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-wrapper">
+                                    <canvas id="categoryChart" width="300" height="240"></canvas>
+                                </div>
+                                <div class="chart-legend" id="chartLegend">
+                                    <!-- Dynamic Legend -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Current Learned Hypothesis Card -->
+                        <div class="card hypothesis-card">
+                            <div class="card-header">
+                                <h3 class="card-title">Current Learned Hypothesis</h3>
+                                <span class="card-badge">Find-S Specific Hypothesis $h$</span>
+                            </div>
+                            <div class="card-body">
+                                <p class="hypothesis-desc">
+                                    The Find-S algorithm starts at the most specific null hypothesis 
+                                    <code>⟨ Ø, Ø, Ø, Ø, Ø ⟩</code> and incrementally generalizes only when encountering positive instances (<em>Good Performer</em>).
+                                </p>
+
+                                <div class="hypothesis-box" id="hypothesisDisplay">
+                                    <code>⟨ Regular, Satisfactory, Completed, ?, Passed ⟩</code>
+                                </div>
+
+                                <div class="hypothesis-features-list" id="hypothesisChips">
+                                    <!-- Populated via JS -->
+                                </div>
+
+                                <div class="hypothesis-note">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                    </svg>
+                                    <span>
+                                        Constraint <strong>'?'</strong> indicates that any value is acceptable for that attribute based on positive training observations.
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. STUDENT PREDICTION PAGE -->
+                <section id="predictPage" class="page-section">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Student Performance Prediction</h2>
+                            <p class="section-subtitle">
+                                Enter student academic indicators to evaluate against the learned concept hypothesis.
+                            </p>
+                        </div>
+                        <div class="quick-samples">
+                            <span class="qs-label">Load Preset Profile:</span>
+                            <button type="button" class="btn-chip" onclick="fillSample('high')">High Achiever</button>
+                            <button type="button" class="btn-chip" onclick="fillSample('steady')">Steady Performer</button>
+                            <button type="button" class="btn-chip" onclick="fillSample('struggling')">Struggling Student</button>
+                        </div>
+                    </div>
+
+                    <div class="prediction-container">
+                        <div class="card form-card">
+                            <form id="predictionForm" novalidate>
+                                <div class="form-grid">
+                                    <!-- Student ID -->
+                                    <div class="form-group col-span-2">
+                                        <label for="studentId">Student ID <span class="text-muted">(Optional)</span></label>
+                                        <input type="text" id="studentId" name="student_id" placeholder="e.g., STU-2026-CS01" class="form-control">
+                                        <small class="form-hint">Used for tracking and records reference.</small>
+                                        <div class="field-error" id="err_student_id"></div>
+                                    </div>
+
+                                    <!-- Attendance -->
+                                    <div class="form-group">
+                                        <div class="label-with-badge">
+                                            <label for="attendance">Attendance Percentage (%) <span class="required">*</span></label>
+                                            <span class="field-benchmark">Benchmark: ≥ 75% (High)</span>
+                                        </div>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="attendance" name="attendance" step="0.1" min="0" max="100" placeholder="0 - 100" class="form-control" required>
+                                            <span class="unit-tag">%</span>
+                                        </div>
+                                        <small class="form-hint">Categorized as High (≥75%) or Low (&lt;75%)</small>
+                                        <div class="field-error" id="err_attendance"></div>
+                                    </div>
+
+                                    <!-- Internal Assessment Marks -->
+                                    <div class="form-group">
+                                        <div class="label-with-badge">
+                                            <label for="internalMarks">Internal Assessment Marks <span class="required">*</span></label>
+                                            <span class="field-benchmark">Benchmark: ≥ 30 / 50 (High)</span>
+                                        </div>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="internalMarks" name="internal_marks" step="0.1" min="0" max="50" placeholder="0 - 50" class="form-control" required>
+                                            <span class="unit-tag">/ 50</span>
+                                        </div>
+                                        <small class="form-hint">Categorized as High (≥30) or Low (&lt;30)</small>
+                                        <div class="field-error" id="err_internal_marks"></div>
+                                    </div>
+
+                                    <!-- Assignment Completion -->
+                                    <div class="form-group">
+                                        <div class="label-with-badge">
+                                            <label for="assignmentCompletion">Assignment Completion (%) <span class="required">*</span></label>
+                                            <span class="field-benchmark">Benchmark: ≥ 75% (High)</span>
+                                        </div>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="assignmentCompletion" name="assignment_completion" step="0.1" min="0" max="100" placeholder="0 - 100" class="form-control" required>
+                                            <span class="unit-tag">%</span>
+                                        </div>
+                                        <small class="form-hint">Categorized as High (≥75%) or Low (&lt;75%)</small>
+                                        <div class="field-error" id="err_assignment_completion"></div>
+                                    </div>
+
+                                    <!-- Study Hours -->
+                                    <div class="form-group">
+                                        <div class="label-with-badge">
+                                            <label for="studyHours">Study Hours Per Day <span class="required">*</span></label>
+                                            <span class="field-benchmark">Benchmark: ≥ 3.0 hrs (High)</span>
+                                        </div>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="studyHours" name="study_hours" step="0.1" min="0" max="24" placeholder="0 - 24" class="form-control" required>
+                                            <span class="unit-tag">hrs/day</span>
+                                        </div>
+                                        <small class="form-hint">Categorized as High (≥3.0) or Low (&lt;3.0)</small>
+                                        <div class="field-error" id="err_study_hours"></div>
+                                    </div>
+
+                                    <!-- Previous Exam Marks -->
+                                    <div class="form-group col-span-2">
+                                        <div class="label-with-badge">
+                                            <label for="previousExamMarks">Previous Examination Marks (%) <span class="required">*</span></label>
+                                            <span class="field-benchmark">Benchmark: ≥ 60%</span>
+                                        </div>
+                                        <div class="input-with-unit">
+                                            <input type="number" id="previousExamMarks" name="previous_exam_marks" step="0.1" min="0" max="100" placeholder="0 - 100" class="form-control" required>
+                                            <span class="unit-tag">%</span>
+                                        </div>
+                                        <small class="form-hint">Passed (≥60%) vs. BelowAverage (&lt;60%)</small>
+                                        <div class="field-error" id="err_previous_exam_marks"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="submit" id="predictBtn" class="btn btn-primary btn-lg">
+                                        <span class="btn-spinner" id="predictSpinner" style="display:none;"></span>
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                        </svg>
+                                        <span>Predict Performance</span>
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary">Clear Form</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Sidebar Info Card -->
+                        <div class="card info-card">
+                            <h3 class="info-card-title">Concept Learning Evaluation Rules</h3>
+                            <p class="info-card-text">
+                                The Find-S classifier performs symbolic matching between the student's discretized 
+                                academic profile and the learned hypothesis vector.
+                            </p>
+                            <ul class="rule-list">
+                                <li>
+                                    <span class="rule-icon success">✓</span>
+                                    <div>
+                                        <strong>Positive Classification ("Good Performer")</strong>
+                                        <p>Assigned when <em>every</em> attribute satisfies the corresponding constraint in hypothesis <code>h</code>.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="rule-icon warning">!</span>
+                                    <div>
+                                        <strong>Negative Classification ("Needs Academic Support")</strong>
+                                        <p>Triggered whenever even a single attribute constraint is violated.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. PREDICTION RESULTS PAGE -->
+                <section id="resultsPage" class="page-section">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Prediction Diagnostics & Recommendations</h2>
+                            <p class="section-subtitle">
+                                Interpretable breakdown of the Find-S classification and customized academic advisories.
+                            </p>
+                        </div>
+                        <button class="btn btn-outline" onclick="navigateTo('predictPage')">
+                            ← Enter Another Student
+                        </button>
+                    </div>
+
+                    <!-- Placeholder state when no prediction made yet -->
+                    <div id="noResultsState" class="empty-state-card">
+                        <div class="empty-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 14 14"></polyline>
+                            </svg>
+                        </div>
+                        <h3>No Prediction Evaluated Yet</h3>
+                        <p>Fill out the student academic indicators in the Student Prediction tab to view the concept matching breakdown and targeted guidance.</p>
+                        <button class="btn btn-primary" onclick="navigateTo('predictPage')">Go to Prediction Form</button>
+                    </div>
+
+                    <!-- Populated Results Container -->
+                    <div id="resultsContent" style="display:none;" class="results-layout">
+                        <!-- Top Result Card -->
+                        <div class="card result-banner-card" id="resultBanner">
+                            <div class="banner-top">
+                                <div>
+                                    <span class="result-student-id" id="resStudentId">STU-NEW</span>
+                                    <h3 class="result-category-title" id="resCategory">Good Performer</h3>
+                                </div>
+                                <div class="result-badge-large" id="resBadge">
+                                    <span class="badge-text" id="resBadgeText">Hypothesis Match</span>
+                                </div>
+                            </div>
+                            <p class="result-summary-text" id="resSummary">
+                                The student's academic profile has been evaluated against the Find-S concept learning hypothesis.
+                            </p>
+                            <div style="font-size: 0.82rem; color: #475569; margin-top: 0.5rem;">
+                                <strong>Learned Hypothesis:</strong> <code id="resHypothesis" style="color: #1d4ed8; font-weight: 700; background: #e0f2fe; padding: 2px 8px; border-radius: 4px;">⟨ ... ⟩</code>
+                            </div>
+                            <div class="result-academic-suggestion-box" id="resAcademicSuggestionBox" style="margin-top: 0.85rem; padding: 0.85rem 1.1rem; background: #f0f7ff; border-left: 4px solid #2563eb; border-radius: 6px;">
+                                <strong style="color: #1e3a8a; display: block; font-size: 0.85rem; margin-bottom: 0.25rem;">Academic Improvement Suggestion:</strong>
+                                <span id="resAcademicSuggestion" style="font-size: 0.88rem; color: #334155; line-height: 1.5;">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Feature Influence Explanation Table -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Feature Influence & Hypothesis Constraint Analysis</h3>
+                                <span class="card-subtitle">Transparent comparison between student values and hypothesis expectations</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Feature Parameter</th>
+                                                <th>Raw Input</th>
+                                                <th>Discretized Concept</th>
+                                                <th>Hypothesis Constraint</th>
+                                                <th>Evaluation Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="featureAnalysisTable">
+                                            <!-- Dynamically inserted -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Academic Improvement Suggestions -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Targeted Academic Improvement Suggestions</h3>
+                                <span class="card-subtitle">Pedagogical recommendations based on specific deficit areas</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="suggestions-grid" id="suggestionsContainer">
+                                    <!-- Dynamic suggestions -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Educational Disclaimer Alert -->
+                        <div class="disclaimer-alert">
+                            <div class="alert-icon">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="alert-title">Educational Estimate Notice</h4>
+                                <p class="alert-desc" id="resDisclaimer">
+                                    This prediction is an educational estimate derived from the symbolic Find-S Concept Learning algorithm on academic indicators. It is not a guaranteed academic outcome and should be utilized as advisory guidance alongside holistic mentoring.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. STUDENT RECORDS PAGE -->
+                <section id="recordsPage" class="page-section">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">Sample Student Records</h2>
+                            <p class="section-subtitle">
+                                Repository of labeled student profiles used for training and empirical validation.
+                            </p>
+                        </div>
+                        <div class="records-controls">
+                            <div class="search-box">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                <input type="text" id="recordsSearch" placeholder="Search by Student ID..." class="search-input">
+                            </div>
+                            <div class="filter-dropdown">
+                                <select id="recordsFilter" class="filter-select">
+                                    <option value="all">All Classifications</option>
+                                    <option value="Good Performer">Good Performer</option>
+                                    <option value="Needs Academic Support">Needs Academic Support</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Attendance</th>
+                                        <th>Internal Marks</th>
+                                        <th>Assignment %</th>
+                                        <th>Daily Study</th>
+                                        <th>Prev Exam</th>
+                                        <th>Classification</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentRecordsTable">
+                                    <!-- Dynamic rows -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pagination-footer">
+                            <span class="pagination-info" id="paginationInfo">Showing 1 to 10 of 120 records</span>
+                            <div class="pagination-btns">
+                                <button class="btn btn-outline btn-sm" id="prevPageBtn">Previous</button>
+                                <span class="page-indicator" id="pageIndicator">Page 1 of 12</span>
+                                <button class="btn btn-outline btn-sm" id="nextPageBtn">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. ABOUT THE MODEL PAGE -->
+                <section id="modelPage" class="page-section">
+                    <div class="section-header">
+                        <div>
+                            <h2 class="section-title">About the Machine Learning Model</h2>
+                            <p class="section-subtitle">
+                                Theoretical foundations, Find-S algorithm mechanics, empirical evaluation, and operational limitations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="about-grid">
+                        <!-- Card 1: Concept Learning -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">1. What is Concept Learning?</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-body">
+                                    In machine learning, <strong>Concept Learning</strong> is defined as inferring a boolean-valued function from training examples of its input and output attributes.
+                                </p>
+                                <p class="text-body">
+                                    In our educational analytics context, the target concept is:
+                                </p>
+                                <div class="code-banner">
+                                    <code>c(x) = 1 (Good Performer) &nbsp; vs &nbsp; c(x) = 0 (Needs Academic Support)</code>
+                                </div>
+                                <p class="text-body">
+                                    Each student instance $x$ is represented as a conjunction of continuous attributes mapped into discrete concept states:
+                                </p>
+                                <ul class="bullet-list">
+                                    <li><strong>Attendance:</strong> <code>Regular (≥75%)</code> vs <code>Irregular (&lt;75%)</code></li>
+                                    <li><strong>Internal Assessment:</strong> <code>Satisfactory (≥30/50)</code> vs <code>Unsatisfactory (&lt;30/50)</code></li>
+                                    <li><strong>Assignment Completion:</strong> <code>Completed (≥70%)</code> vs <code>Incomplete (&lt;70%)</code></li>
+                                    <li><strong>Study Hours:</strong> <code>Sufficient (≥2.5 hrs/day)</code> vs <code>Insufficient (&lt;2.5 hrs/day)</code></li>
+                                    <li><strong>Previous Exam:</strong> <code>Passed (≥60%)</code> vs <code>BelowAverage (&lt;60%)</code></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Find-S Algorithm -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">2. The Find-S (Find-Specific) Algorithm</h3>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-body">
+                                    Formulated by Tom Mitchell (1997), Find-S traverses the hypothesis space $H$ from the most specific hypothesis toward generalized constraints that encompass all positive examples:
+                                </p>
+                                <div class="step-process">
+                                    <div class="sp-step">
+                                        <div class="sp-num">Step 1</div>
+                                        <div class="sp-text">Initialize $h$ to the most specific hypothesis: <code>h = ⟨ Ø, Ø, Ø, Ø, Ø ⟩</code>.</div>
+                                    </div>
+                                    <div class="sp-step">
+                                        <div class="sp-num">Step 2</div>
+                                        <div class="sp-text">For each positive training example $x$ ($label = \text{Good Performer}$):</div>
+                                    </div>
+                                    <div class="sp-substep">
+                                        • For each attribute constraint $a_i$ in $h$:<br>
+                                        &nbsp;&nbsp; - If $a_i = \emptyset$, set $a_i = x_i$.<br>
+                                        &nbsp;&nbsp; - Else if $a_i \neq x_i$ and $a_i \neq '?'$, generalize to $a_i = '?'$.
+                                    </div>
+                                    <div class="sp-step">
+                                        <div class="sp-num">Step 3</div>
+                                        <div class="sp-text">Negative training examples are completely ignored.</div>
+                                    </div>
+                                    <div class="sp-step">
+                                        <div class="sp-num">Step 4</div>
+                                        <div class="sp-text">Output the final most specific consistent hypothesis $h$.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step-by-Step Training Trace Table -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h3 class="card-title">Find-S Step-by-Step Hypothesis Evolution Trace</h3>
+                            <span class="card-subtitle">Live inspection of how the hypothesis updated instance-by-instance during training</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Step #</th>
+                                            <th>Instance ID</th>
+                                            <th>Instance Attributes</th>
+                                            <th>Example Label</th>
+                                            <th>Find-S Action</th>
+                                            <th>Updated Hypothesis</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="trainingTraceTable">
+                                        <!-- Dynamic trace rows -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model Evaluation & Confusion Matrix Card -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h3 class="card-title">Empirical Model Evaluation on Unseen Test Data</h3>
+                            <span class="card-subtitle">Rigorous assessment on held-out test split (25% unseen records)</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="eval-grid">
+                                <div class="eval-metrics-column">
+                                    <div class="eval-stat-box">
+                                        <span class="es-label">Empirical Test Accuracy</span>
+                                        <div class="es-val text-success" id="evalAccuracy">-</div>
+                                    </div>
+                                    <div class="eval-stat-box">
+                                        <span class="es-label">Precision (Positive Predictive Value)</span>
+                                        <div class="es-val text-indigo" id="evalPrecision">-</div>
+                                    </div>
+                                    <div class="eval-stat-box">
+                                        <span class="es-label">Recall (Sensitivity)</span>
+                                        <div class="es-val text-blue" id="evalRecall">-</div>
+                                    </div>
+                                    <div class="eval-stat-box">
+                                        <span class="es-label">F1-Score</span>
+                                        <div class="es-val text-purple" id="evalF1">-</div>
+                                    </div>
+                                </div>
+
+                                <div class="eval-matrix-column">
+                                    <h4 class="matrix-title">Test Set Confusion Matrix</h4>
+                                    <div class="matrix-grid">
+                                        <div class="matrix-cell header-cell"></div>
+                                        <div class="matrix-cell header-cell">Predicted: Needs Support</div>
+                                        <div class="matrix-cell header-cell">Predicted: Good Performer</div>
+
+                                        <div class="matrix-cell header-cell">Actual: Needs Support</div>
+                                        <div class="matrix-cell val-cell success-cell" id="cmTN">TN: -</div>
+                                        <div class="matrix-cell val-cell danger-cell" id="cmFP">FP: -</div>
+
+                                        <div class="matrix-cell header-cell">Actual: Good Performer</div>
+                                        <div class="matrix-cell val-cell danger-cell" id="cmFN">FN: -</div>
+                                        <div class="matrix-cell val-cell success-cell" id="cmTP">TP: -</div>
+                                    </div>
+                                    <p class="matrix-legend">
+                                        * True Positives (TP) &amp; True Negatives (TN) reflect correct classifications.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Model Limitations & Academic Transparency -->
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h3 class="card-title">Scientific Limitations of the Find-S Algorithm</h3>
+                            <span class="card-subtitle">Academic integrity: Understanding where the algorithm succeeds and where it falls short</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="limitations-grid" id="limitationsGrid">
+                                <!-- Dynamic limitations -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification for System Alerts -->
+    <div id="toast" class="toast"></div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
